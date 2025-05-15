@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seni Çok Seviyorum Asel!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ffb6c1);
+            text-align: center;
+            overflow: hidden;
+        }
+        .header {
+            position: absolute;
+            top: 20px;
+            font-size: 30px;
+            font-family: 'Great Vibes', cursive;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .question {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+            max-width: 80%;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #yesButton, #yesButton2 {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        #yesButton:hover, #yesButton2:hover {
+            background-color: #e63939;
+            transform: scale(1.1);
+        }
+        #noButton {
+            background-color: #4d79ff;
+            color: white;
+            position: relative;
+        }
+        #noButton:hover {
+            background-color: #3366cc;
+            transform: scale(1.1);
+        }
+        #response {
+            display: none;
+            font-size: 30px;
+            color: #fff;
+            margin-top: 20px;
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 90%;
+            backdrop-filter: blur(5px);
+        }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ff4d4d;
+            transform: rotate(-45deg);
+            animation: float 3s infinite;
+            display: none;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: #ff4d4d;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -15px;
+            left: 0;
+        }
+        .heart::after {
+            left: 15px;
+            top: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(-45deg); opacity: 0; }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 600px) {
+            .question {
+                font-size: 24px;
+            }
+            .header {
+                font-size: 24px;
+            }
+            button {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+            #response {
+                font-size: 24px;
+                padding: 15px;
+            }
+            .heart {
+                width: 25px;
+                height: 25px;
+            }
+            .heart::before,
+            .heart::after {
+                width: 25px;
+                height: 25px;
+            }
+            .heart::before {
+                top: -12.5px;
+            }
+            .heart::after {
+                left: 12.5px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">Canım Asel, Seni Çok Seviyorum!</div>
+    <div class="question" id="question1">Aşkım, sanırım küstün bana, değil mi?</div>
+    <div class="buttons" id="buttons1">
+        <button id="yesButton" onclick="showSecondQuestion()">Evet</button>
+    </div>
+    <div class="question" id="question2" style="display: none;">Ama Ahmet’in sana çooook aşık ve barışmak istiyor, barışalım mı?</div>
+    <div class="buttons" id="buttons2" style="display: none;">
+        <button id="yesButton2" onclick="showResponse()">Evet</button>
+        <button id="noButton" onclick="moveNoButton()">Hayır</button>
+    </div>
+    <div id="response">Affettiğin için teşekkür ederim sevgilimmm ❤️❤️❤️</div>
+    <div id="hearts"></div>
+
+    <script>
+        function showSecondQuestion() {
+            document.getElementById('question1').style.display = 'none';
+            document.getElementById('buttons1').style.display = 'none';
+            document.getElementById('question2').style.display = 'block';
+            document.getElementById('buttons2').style.display = 'flex';
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById('noButton');
+            const maxX = window.innerWidth - noButton.offsetWidth - 20;
+            const maxY = window.innerHeight - noButton.offsetHeight - 20;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
+        }
+
+        function showResponse() {
+            document.getElementById('question2').style.display = 'none';
+            document.getElementById('buttons2').style.display = 'none';
+            document.getElementById('response').style.display = 'block';
+            document.getElementById('yesButton2').disabled = true;
+            document.getElementById('noButton').disabled = true;
+            createHearts();
+        }
+
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 30; i++) { // Daha fazla kalp (20 -> 30)
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = `${Math.random() * window.innerWidth}px`;
+                heart.style.top = `${window.innerHeight - 50}px`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                heart.style.display = 'block';
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
